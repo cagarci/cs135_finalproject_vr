@@ -49,6 +49,13 @@ public class CharController_Motor : MonoBehaviour {
 
 
 		Vector3 movement = new Vector3 (moveFB, gravity, moveLR);
+        if (Input.GetKey("space"))
+        {
+            speed = 15.0f;
+        } else if (!Input.GetKey("space"))
+        {
+            speed = 10.0f;
+        }
 
 
 
