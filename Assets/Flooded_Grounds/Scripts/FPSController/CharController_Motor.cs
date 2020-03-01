@@ -58,8 +58,7 @@ public class CharController_Motor : MonoBehaviour {
         }
 
 
-
-		if (webGLRightClickRotation) {
+        if (webGLRightClickRotation) {
 			if (Input.GetKey (KeyCode.Mouse0)) {
 				CameraRotation (cam, rotX, rotY);
 			}

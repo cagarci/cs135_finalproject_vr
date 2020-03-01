@@ -3,7 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Item
+  - Target
+  - Wood
+  - Concrete
+  - Dirt
+  - Fire
+  - Metal
+  - Crosshair
+  - NPC
+  - Flesh
+  - Cover
   layers:
   - Default
   - TransparentFX
@@ -25,9 +36,9 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
+  - Weapon
+  - Player
+  - NPC
   - 
   - 
   - 
