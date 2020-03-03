@@ -30,7 +30,7 @@ namespace DarkTreeFPS
         [HideInInspector]
         public Rigidbody controllerRigidbody;
         
-        private CapsuleCollider controllerCollider;
+        public CapsuleCollider controllerCollider;
         public Transform camHolder;
         private float moveSpeedLocal;
 
