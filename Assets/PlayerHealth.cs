@@ -36,7 +36,7 @@ public class PlayerHealth : MonoBehaviour
             RegenHealth();
             timer = 0;
         }
-        /*if (damaged)
+        if (damaged)
         {
             // ... set the colour of the damageImage to the flash colour.
             damageImage.color = flashColour;
@@ -47,7 +47,7 @@ public class PlayerHealth : MonoBehaviour
             // ... transition the colour back to clear.
             damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
         }
-        */
+        
         // Reset the damaged flag.
         damaged = false;
     }

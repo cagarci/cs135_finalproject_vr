@@ -16,7 +16,7 @@ public class EnemyAttack : MonoBehaviour
     bool playerInRange;                         // Whether player is within the trigger collider and can be attacked.
     float timer;                                // Timer for counting up to the next attack.
     AudioSource enemyAudio;
-
+    private SphereCollider col;
     void Awake()
     {
         enemyAudio = GetComponent<AudioSource>();
@@ -24,6 +24,7 @@ public class EnemyAttack : MonoBehaviour
         playerHealth = player.GetComponent<PlayerHealth>();
         //enemyHealth = GetComponent<EnemyHealth>();
         anim = GetComponent<Animator>();
+        col = GetComponent<SphereCollider>();
     }
 
 

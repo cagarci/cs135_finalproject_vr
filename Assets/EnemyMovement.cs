@@ -4,17 +4,26 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    Transform player;               // Reference to the player's position.
-    //PlayerHealth playerHealth;      // Reference to the player's health.
-    //EnemyHealth enemyHealth;        // Reference to this enemy's health.
-    UnityEngine.AI.NavMeshAgent nav;               // Reference to the nav mesh agent.
+    public float patrolSpeed = 0.5f;
+    public float chaseSpeed = 1f;
+    public float patrolWaitTime = 1f;
+    public float chaseWaitTime = 5f;
 
+    private Transform player;               // Reference to the player's position.
+    private PlayerHealth playerHealth;      // Reference to the player's health.
+    private EnemySighting enemySighting;
+    //EnemyHealth enemyHealth;        // Reference to this enemy's health.
+    private UnityEngine.AI.NavMeshAgent nav;               // Reference to the nav mesh agent.
+    private float patrolTimer;
+    private float chaseTimer;
+    private int wayPointIndex;
 
     void Awake()
     {
         // Set up the references.
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        //playerHealth = player.GetComponent<PlayerHealth>();
+        playerHealth = player.GetComponent<PlayerHealth>();
+        enemySighting = GetComponent<EnemySighting>();
         //enemyHealth = GetComponent<EnemyHealth>();
         nav = GetComponent<UnityEngine.AI.NavMeshAgent>();
     }
@@ -23,16 +32,26 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         // If the enemy and the player have health left...
-        //if (enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0)
-       // {
+        if (/*enemyHealth.currentHealth > 0 &&*/ playerHealth.currentHealth > 0 && enemySighting.playerInSight)
+        {
             // ... set the destination of the nav mesh agent to the player.
             nav.SetDestination(player.position);
-       // }
+        }
         // Otherwise...
-       // else
-       // {
+        else
+        {
             // ... disable the nav mesh agent.
-          //  nav.enabled = false;
-       // }
+               nav.enabled = false;
+        }
+    }
+
+    void Chasing()
+    {
+
+    }
+
+    void Patrolling()
+    {
+
     }
 }

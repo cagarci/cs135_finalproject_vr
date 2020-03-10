@@ -15,7 +15,7 @@ public class getKey1 : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerItem = player.GetComponent<PlayerItem>();
-        key1 = GameObject.FindGameObjectWithTag("Key");
+        //key1 = GameObject.FindGameObjectWithTag("Key");
         //k = GetComponent<MeshRenderer>();
     }
     // Update is called once per frame
@@ -24,11 +24,11 @@ public class getKey1 : MonoBehaviour
         // If the entering collider is the player...
         if (other.gameObject == player)
         {
-            if (Input.GetKey("a"))
+            if (Input.GetKeyDown("f"))
             {
                 playerItem.keyNum += 1;
                 //k.enabled = false;
-                Destroy(key1);
+                Destroy(this.gameObject);
             }
         }
     }
