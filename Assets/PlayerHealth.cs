@@ -5,8 +5,16 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int startingHealth = 100;
+    [Header("Health")]
+    [Tooltip("Player's health")]
     public int currentHealth;
+    [Tooltip("UI element to draw health as number")]
+    public Text healthUIText;
+    [Tooltip("UI element to draw health as slider")]
+    public Slider healthUISlider;
+    public Text playerStats;
+    public int startingHealth = 100;
+    
     public float restTime = 5.0f;
     float timer;
     public Image damageImage;
@@ -26,6 +34,8 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        DrawPlayerStats();
+        DrawHealthStats();
         timer += Time.deltaTime;
         if (damaged)
         {
@@ -50,6 +60,7 @@ public class PlayerHealth : MonoBehaviour
         
         // Reset the damaged flag.
         damaged = false;
+        
     }
     public void TakeDamage()
     {
@@ -59,7 +70,7 @@ public class PlayerHealth : MonoBehaviour
 
         // Reduce the current health by the damage amount.
         currentHealth -= 5;
-        playerAudio.Play();
+        //playerAudio.Play();
         // If the player has lost all it's health and the death flag hasn't been set yet...
         if (currentHealth <= 0 && !isDead)
         {
@@ -82,5 +93,19 @@ public class PlayerHealth : MonoBehaviour
     void Death()
     {
        
+    }
+
+    public void DrawPlayerStats()
+{
+    if (playerStats != null)
+        playerStats.text = string.Format("--- Player statistic ---\n\n\n - Health: {0}\n\n", currentHealth);
+}
+    void DrawHealthStats()
+    {
+        if (healthUIText != null)
+            healthUIText.text = currentHealth.ToString();
+
+        if (healthUISlider != null)
+            healthUISlider.value = currentHealth;
     }
 }

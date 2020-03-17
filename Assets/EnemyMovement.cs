@@ -12,6 +12,7 @@ public class EnemyMovement : MonoBehaviour
     private Transform player;               // Reference to the player's position.
     private PlayerHealth playerHealth;      // Reference to the player's health.
     private EnemySighting enemySighting;
+    private EnemySighting playerInPresence;
     //EnemyHealth enemyHealth;        // Reference to this enemy's health.
     private UnityEngine.AI.NavMeshAgent nav;               // Reference to the nav mesh agent.
     private float patrolTimer;
@@ -24,6 +25,7 @@ public class EnemyMovement : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerHealth = player.GetComponent<PlayerHealth>();
         enemySighting = GetComponent<EnemySighting>();
+        playerInPresence = GetComponent<EnemySighting>();
         //enemyHealth = GetComponent<EnemyHealth>();
         nav = GetComponent<UnityEngine.AI.NavMeshAgent>();
     }
@@ -32,9 +34,10 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         // If the enemy and the player have health left...
-        if (/*enemyHealth.currentHealth > 0 &&*/ playerHealth.currentHealth > 0 && enemySighting.playerInSight)
+        if (playerHealth.currentHealth > 0 && playerInPresence == true)
         {
             // ... set the destination of the nav mesh agent to the player.
+            nav.enabled = true;
             nav.SetDestination(player.position);
         }
         // Otherwise...

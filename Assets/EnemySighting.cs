@@ -32,13 +32,18 @@ public class EnemySighting : MonoBehaviour
             if (angle < fieldOfViewAngle * 0.5)
             {
                 RaycastHit hit;
-                if (Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, 3))
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
                 {
-                    Debug.DrawRay(transform.position + transform.up, transform.forward, Color.green); print("Hit");
-                    if (hit.collider.gameObject == player)
+                    //Debug.DrawRay(transform.position + transform.up, transform.forward, Color.green); print("Hit");
+                    if (hit.collider.tag == "Player")
                     {
                         
                         playerInSight = true;
+                    }
+                    else
+                    {
+                        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
+                        Debug.Log("Did not Hit");
                     }
                 }
 
