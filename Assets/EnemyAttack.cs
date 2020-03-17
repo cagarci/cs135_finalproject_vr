@@ -4,7 +4,7 @@ using System.Collections;
 
 public class EnemyAttack : MonoBehaviour
 {
-    public float timeBetweenAttacks = 3.0f;     // The time in seconds between each attack.
+    public float timeBetweenAttacks;     // The time in seconds between each attack.
     public int attackDamage = 5;               // The amount of health taken away per attack.
 
 
@@ -13,7 +13,7 @@ public class EnemyAttack : MonoBehaviour
     GameObject player;                          // Reference to the player GameObject.
     PlayerHealth playerHealth;                  // Reference to the player's health.
     //EnemyHealth enemyHealth;                    // Reference to this enemy's health.
-    bool playerInRange;                         // Whether player is within the trigger collider and can be attacked.
+    public bool playerInRange;                         // Whether player is within the trigger collider and can be attacked.
     float timer;                                // Timer for counting up to the next attack.
     AudioSource enemyAudio;
     private SphereCollider col;
@@ -23,8 +23,9 @@ public class EnemyAttack : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerHealth = player.GetComponent<PlayerHealth>();
         //enemyHealth = GetComponent<EnemyHealth>();
-        anim = GetComponent<Animator>();
+        anim = gameObject.GetComponent<Animator>();
         col = GetComponent<SphereCollider>();
+        timeBetweenAttacks = 3;
     }
 
 
@@ -35,6 +36,7 @@ public class EnemyAttack : MonoBehaviour
         {
             // ... the player is in range.
             playerInRange = true;
+            
         }
     }
 
@@ -46,6 +48,7 @@ public class EnemyAttack : MonoBehaviour
         {
             // ... the player is no longer in range.
             playerInRange = false;
+            anim.SetBool("InRange", playerInRange);
         }
     }
 
@@ -64,7 +67,7 @@ public class EnemyAttack : MonoBehaviour
         if (playerHealth.currentHealth <= 0)
        {
             // ... tell the animator the player is dead.
-            anim.SetTrigger("PlayerDead");
+            anim.SetBool("PlayerDead", true);
         }
     }
 
@@ -73,7 +76,7 @@ public class EnemyAttack : MonoBehaviour
     {
         // Reset the timer.
         timer = 0;
-        anim.SetTrigger("InRange");
+        anim.SetBool("InRange", playerInRange);
         enemyAudio.Play();
         // If the player has health to lose...
         if (playerHealth.currentHealth > 0)
