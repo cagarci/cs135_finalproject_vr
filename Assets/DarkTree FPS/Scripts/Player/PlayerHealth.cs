@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class PlayerHealth : MonoBehaviour
 {
     [Header("Health")]
@@ -18,24 +18,26 @@ public class PlayerHealth : MonoBehaviour
     public float restTime = 5.0f;
     float timer;
     public Image damageImage;
-
     public float flashSpeed = 5f;
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
     AudioSource playerAudio;
     bool isDead;                                                // Whether the player is dead.
     bool damaged;                                               // True when the player gets damaged.
+
     // Start is called before the first frame update
     void Awake()
     {
         playerAudio = GetComponent<AudioSource>();
         currentHealth = startingHealth;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        DrawPlayerStats();
-        DrawHealthStats();
+
+            DrawPlayerStats();
+            DrawHealthStats();
         timer += Time.deltaTime;
         if (damaged)
         {
@@ -72,7 +74,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= 5;
         //playerAudio.Play();
         // If the player has lost all it's health and the death flag hasn't been set yet...
-        if (currentHealth <= 0 && !isDead)
+        if (currentHealth <= 0 )
         {
             // ... it should die.
             Death();
@@ -92,14 +94,15 @@ public class PlayerHealth : MonoBehaviour
     }
     void Death()
     {
-       
+
+        Invoke("RestartScene", 4.0f);
     }
 
     public void DrawPlayerStats()
-{
-    if (playerStats != null)
-        playerStats.text = string.Format("--- Player statistic ---\n\n\n - Health: {0}\n\n", currentHealth);
-}
+    {
+        if (playerStats != null)
+            playerStats.text = string.Format("--- Player statistic ---\n\n\n - Health: {0}\n\n", currentHealth);
+    }
     void DrawHealthStats()
     {
         if (healthUIText != null)
@@ -107,5 +110,9 @@ public class PlayerHealth : MonoBehaviour
 
         if (healthUISlider != null)
             healthUISlider.value = currentHealth;
+    }
+    void RestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

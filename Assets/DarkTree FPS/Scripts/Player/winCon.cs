@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class winCon : MonoBehaviour
 {
@@ -18,14 +19,21 @@ public class winCon : MonoBehaviour
         // If the entering collider is the player...
         if (other.gameObject == player)
         {
-            //if(keyNum >= 3)
-            // ... the player is in range.
-            //gameOver();
+            if(playerItem.keyNum >= 3)
+                gameOver();
         }
     }
     // Update is called once per frame
     void Update()
     {
 
+    }
+    void gameOver()
+    {
+        Invoke("RestartScene", 4.0f);
+    }
+    void RestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

@@ -24,7 +24,7 @@ public class getKey1 : MonoBehaviour
         // If the entering collider is the player...
         if (other.gameObject == player)
         {
-            if (Input.GetKeyDown("f"))
+            if (Input.GetKeyDown("t"))
             {
                 playerItem.keyNum += 1;
                 //k.enabled = false;
